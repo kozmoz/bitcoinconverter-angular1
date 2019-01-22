@@ -7,7 +7,7 @@ AngularJS; Lege velden na reload, opgelost!
 
 ## Getting Started
 
-The source code is hosted at [GitHub](https://github.com/kozmoz/bitcoinconverter-angular1). 
+The source code is hosted at [GitHub](https://github.com/kozmoz/bitcoinconverter-angular1/tree/save-state-in-url). 
 
 The following Git command wil clone the project and download the sources to the local machine.  
 
