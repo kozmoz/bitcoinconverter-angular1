@@ -14,27 +14,16 @@ app.factory('tickerService', function ($http, $timeout, $log) {
 
                 $log.info('Update exchange rate info');
 
-                // Two sequential requests, one for EUR exchange rate and one for USD exchange rate.
-                $http.get('https://data.mtgox.com/api/2/BTCEUR/money/ticker').success(function (data) {
-                    if (data && data.result == 'success') {
-                        var exchangerateeur = data.data.buy.value;
-                        $http.get('https://data.mtgox.com/api/2/BTCUSD/money/ticker').success(function (data) {
-                            if (data && data.result == 'success') {
-                                var exchangerateusd = data.data.buy.value;
-                                //var exchangerateupdate = new Date(data.data.now / 1000);
-                                var exchangerateupdate = new Date();
-                                callback(true, exchangerateeur, exchangerateusd, exchangerateupdate);
-                            } else {
-                                callback(false);
-                            }
-                        }).error(function () {
-                                callback(false)
-                            });
-                    }
-                    callback(false);
+                $http.get('https://api.coindesk.com/v1/bpi/currentprice.json').success(function (data) {
+
+                    var exchangerateeur = data.bpi.EUR.rate_float;
+                    var exchangerateusd = data.bpi.USD.rate_float;
+                    var exchangerateupdate = new Date(data.time.updatedISO);
+                    callback(true, exchangerateeur, exchangerateusd, exchangerateupdate);
+
                 }).error(function () {
-                        callback(false)
-                    });
+                    callback(false)
+                });
 
                 // Call this function periodically.
                 $timeout(callWebservice, 60000);
@@ -68,7 +57,7 @@ app.controller('ConverterCtrl', function ($scope, $log, tickerService) {
             $scope.updateerror = '';
         } else {
             // Update error.
-            $scope.updateerror = 'Cannot update, MTGox connection error';
+            $scope.updateerror = 'Cannot update, Coindesk connection error';
         }
     });
 
