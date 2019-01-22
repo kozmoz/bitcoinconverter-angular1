@@ -1,8 +1,8 @@
 **Bitcoin Converter written in Angular 1.1.**
 
 Based on blog post [in Dutch]:
-AngularJS; Web framework met frisse nieuwe aanpak
-https://juur.link/2013/05/angularjs/
+AngularJS; Lege velden na reload, opgelost!
+[http://www.juurlink.org/2013/05/angularjs-lege-velden-na-page-reload/](http://www.juurlink.org/2013/05/angularjs-lege-velden-na-page-reload/)
 
 
 ## Getting Started
